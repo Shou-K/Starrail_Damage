@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ダメージ計算  Dr.レイシオ</title>
+    </head>
+    <body>
+        <h1>Dr.レイシオ ダメージ計算</h1>
+        <h2>キャラステータス入力</h2>
+        <p>戦闘中におけるキャラステータスおよびバフを入力してください。</p>
+        <h3>注意:表記が%のものは小数点に直して入力してください。</h3>
+        <p>例:会心ダメージ178% = 1.78 与ダメージバフ60% = 0.6</p>
+        <div class="form_groupA">
+          <label for="Mylevel">キャラレベル:</label>
+          <input type="number" id="Mylevel" class="Mylevel_imput" placeholder="数値を入力してください">
+        </div>
+
+        <div class="form_groupA">
+          <label for="Attack">最終攻撃力:</label>
+          <input type="number" id="Attack" class="Attack_imput" placeholder="数値を入力してください">
+        </div>
+
+        <div class="form_groupA">
+            <label for="skildamagebahu">ダメージ倍率バフ:</label>
+            <input type="number" id="skildamagebahu" class="skildamagebahu_imput" placeholder="数値を入力してください">
+        </div>
+
+        <div class="form_groupA">
+          <label for="Clidamage">会心ダメージ%:</label>
+          <input type="number" id="Clidamage" class="Clidamage_imput" placeholder="数値を入力してください">
+        </div>
+
+        <div class="form_groupA">
+          <label for="Typedamage">虚数与ダメージ%:</label>
+          <input type="number" id="Typedamage" class="Typedamage_imput" placeholder="数値を入力してください">
+        </div>
+
+        <div class="form_groupA">
+          <label for="Giftdamage">与ダメージバフ%:</label>
+          <input type="number" id="Giftdamage" class="Giftdamage_imput" placeholder="数値を入力してください">
+        </div>
+
+        <div class="form_groupA">
+          <label for="Directdamage">属性耐性貫通%:</label>
+          <input type="number" id="Directdamage" class="Directdamage_imput" placeholder="数値を入力してください">
+        </div>
+
+       <h2>敵ステータス</h2>
+       <p>戦闘中における敵のレベル、種類やかけられているデバフを入力してください。
+
+        <div class="form_groupB">
+            <label for="Enemylevel">敵レベル:</label>
+            <input type="number" id="Enemylevel" class="Enemylevel_imput" placeholder="数値を入力してください">
+        </div>
+
+        <div class="form_groupB">
+            <label for="receivede">被ダメージデバフ%:</label>
+            <input type="number" id="receivede" class="receivede_imput" placeholder="数値を入力してください">
+        </div>
+        
+        <div class="form_groupB">
+            <label for="Blockde">防御デバフ%:</label>
+            <input type="number" id="Blockde" class="Blockde_imput" placeholder="数値を入力してください">
+        </div>
+
+        <div class="form_groupB">
+            <label for="DirectBrock">無視される防御%:</label>
+            <input type="number" id="DirectBrock" class="DirectBrock_imput" placeholder="数値を入力してください">
+        </div>
+
+        <div class="form_groupB">
+            <label for="enemyprotectde">属性耐性デバフ%:</label>
+            <input type="number" id="enemyprotectde" class="enemyprotectde_imput" placeholder="数値を入力してください">
+        </div>
+
+        <label for="enemy_protect">属性耐性%:
+            <select id="enemy_protect" name="enemy_protect">
+                <option value="0">選択</option>
+                <option value="1">弱点あり</option>
+                <option value="2">弱点なし</option>
+                <option value="3">終末獣-厄災の右手</option>
+                <option value="4">終末獣-反物質エンジン</option>
+                <option value="5">金人.門番</option>
+                <option value="6">「十の石心」博戯の砂金石</option>
+            </select>
+        </label>
+
+        <div class="form_groupB">
+            <label for="Bonus">被ダメージボーナス%:</label>
+            <input type="number" id="Bonus" class="Bonus_imput" placeholder="数値を入力してください">
+        </div>
+        
+        <div class="form_groupB">
+            <label for="Destory">撃破されているか:</label>
+            <input type="number" id="Destory" class="Destory_imput" placeholder="数値を入力してください">
+        </div>
+        <p>撃破について:撃破されている場合=1、撃破されていない場合=0.9</p>
+
+       </div>    
+        <div class="normal_at">
+            <h2>計算開始</h2>
+            <button id="calculateButton">計算する</button>
+            <h2>通常攻撃</h2>
+            <label for="normal_at_level">軌跡レベルを入力してください:</label>
+            <select id="normal_at_level" name="normal_at_level">
+                <option value="0">選択</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            <p>会心時: <span id="result1">0</span></p>
+            <p>非会心時: <span id="result2">0</span></p>
+        </div>
+
+        <div class="skill_at">
+            <h2>戦闘スキル</h2>
+            <label for="skill_at_level">軌跡レベルを入力してください:</label>
+            <select id="skill_at_level" name="skill_at_level">
+                <option value="0">選択</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <p>会心時: <span id="result3">0</span></p>
+            <p>非会心時: <span id="result4">0</span></p>
+        </div>
+
+        <div class="normal_at">
+            <h2>天賦攻撃（追加攻撃）</h2>
+            <label for="kiseki_at_level">軌跡レベルを入力してください:</label>
+            <select id="kiseki_at_level" name="kiseki_at_level">
+                <option value="0">選択</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <p>会心時: <span id="result5">0</span></p>
+            <p>非会心時: <span id="result6">0</span></p>
+        </div>
+
+        <div class="normal_at">
+            <h2>必殺技</h2>
+            <label for="ult_at_level">軌跡レベルを入力してください:</label>
+            <select id="ult_at_level" name="ult_at_level">
+                <option value="0">選択</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <p>会心時: <span id="result7">0</span></p>
+            <p>非会心時: <span id="result8">0</span></p>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
